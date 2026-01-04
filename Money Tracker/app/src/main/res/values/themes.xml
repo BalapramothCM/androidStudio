@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MoneyTracker" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_primary</item>
+        <item name="colorSecondary">@color/purple_secondary</item>
+        <item name="android:windowBackground">@color/black_bg</item>
+
+        <item name="textInputStyle">
+            @style/Widget.Material3.TextInputLayout.OutlinedBox
+        </item>
+    </style>
+
+</resources>
