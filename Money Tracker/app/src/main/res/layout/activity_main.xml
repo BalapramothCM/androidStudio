@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#000000"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="24dp">
+
+
+    <!-- TITLE -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MONEY ₹ TRACKER"
+            android:textColor="#FF0000"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <View
+            android:id="@+id/titleBottomSpacer"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <!-- MONTHLY BUDGET INPUT -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMonthlyBudget"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Monthly Budget"
+            app:prefixText="₹ "
+            app:layout_constraintTop_toBottomOf="@id/titleBottomSpacer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMonthlyBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="#FFFFFF"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- MONTHLY BUDGET DISPLAY -->
+        <!-- Budget display text -->
+        <!-- MONTHLY BUDGET DISPLAY ROW -->
+        <LinearLayout
+            android:id="@+id/layoutMonthlyBudgetDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/titleBottomSpacer"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/tvMonthlyBudgetDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This Month Budget : ₹ 0"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/ivBudgetAction"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_edit"
+                app:tint="@android:color/white" />
+        </LinearLayout>
+
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/budgetBarrier"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tilMonthlyBudget,layoutMonthlyBudgetDisplay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <!-- TRANSACTION TYPE (MONEY FLOW) -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleMoneyFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/budgetBarrier"
+            app:layout_constraintStart_toStartOf="parent"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlowDebit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="➖  DEBIT"
+                app:iconGravity="textStart"
+                app:strokeWidth="2dp"
+                app:iconTint="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlowCredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="➕  CREDIT"
+                app:iconGravity="textStart"
+                app:strokeWidth="2dp"
+                app:iconTint="@color/white" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- DATE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Date"
+            android:layout_marginTop="16dp"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/baseline_calendar_month_24"
+            app:layout_constraintTop_toBottomOf="@id/toggleMoneyFlow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- AMOUNT -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Amount"
+            android:layout_marginTop="12dp"
+            app:prefixText="₹ "
+            app:layout_constraintTop_toBottomOf="@id/tilDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="18sp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ACCOUNT TYPE -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleAccountType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tilAmount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDebitAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:strokeWidth="2dp"
+                android:text="DEBIT ACCOUNT"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCreditAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:strokeWidth="2dp"
+                android:text="CREDIT ACCOUNT"/>
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- PAYMENT METHOD -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Payment Method"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/toggleAccountType"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:endIconMode="dropdown_menu">
+
+            <AutoCompleteTextView
+                android:id="@+id/dropdownMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:paddingStart="16dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- BANK -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBank"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Bank"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tilMethod"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:endIconMode="dropdown_menu">
+
+            <AutoCompleteTextView
+                android:id="@+id/dropdownBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:paddingStart="16dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- CATEGORY -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Category"
+            app:endIconMode="dropdown_menu"
+            app:layout_constraintTop_toBottomOf="@id/tilBank"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/dropdownCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:paddingStart="16dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- REASON -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilReason"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Reason"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tilCategory"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="30dp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#AAAAAA"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- REMAINING -->
+        <TextView
+            android:id="@+id/tvRemaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remaining: ₹0"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tilReason"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- SAVE -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tvRemaining"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnClear"
+            app:layout_constraintWidth_percent="0.48"/>
+
+        <!-- CLEAR -->
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="CLEAR"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tvRemaining"
+            app:layout_constraintStart_toEndOf="@id/btnSave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.48"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
